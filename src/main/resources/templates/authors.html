@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<div th:insert="blocks/head :: head"></div>
+<body>
+<header th:insert="blocks/header :: header" data-bs-theme="dark"></header>
+<div class="container mt-5 mb-5 pt-5 pb-5">
+    <h1 class="text-center">Авторы</h1>
+    <div th:each="el : ${authors}" class="container-fluid col-12 d-flex justify-content-center align-self-start row">
+        <div class="col-12 col-md-6 row alert alert-info mt-2">
+            <h3 th:text="${el.name}"></h3></br>
+            <a th:href="'/authors/' + ${el.id} + '/books'" class="btn btn-warning my-1">Книги автора</a>
+        </div>
+    </div>
+</div>
+<div th:insert="blocks/footer :: footer"></div>
+</body>
+</html>

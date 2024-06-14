@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<div th:insert="blocks/head :: head"></div>
+<body>
+<header th:insert="blocks/header :: header" data-bs-theme="dark"></header>
+<div class="container mt-5 mb-5 pt-5 pb-5">
+    <h1 class="text-center">Добавление автора</h1>
+    <form action="/authors/add" method="post">
+        <input type="text" name="name" placeholder="Введите имя автора" class="form-control"></br>
+        <button type="submit" class="btn btn-success">Добавить автора</button>
+    </form>
+</div>
+<div th:insert="blocks/footer :: footer"></div>
+</body>
+</html>
