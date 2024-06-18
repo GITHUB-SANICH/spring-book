@@ -1,10 +1,8 @@
 package com.firstspring.library.controllers;
 
-import com.firstspring.library.models.Author;
 import com.firstspring.library.models.Book;
 import com.firstspring.library.repo.AuthorRepository;
 import com.firstspring.library.repo.BookRepository;
-import org.hibernate.annotations.DialectOverride;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,5 +22,4 @@ public class MainController {
         model.addAttribute("title", "Главная страница");
         return "home";
     }
-
 }

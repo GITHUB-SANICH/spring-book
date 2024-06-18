@@ -6,10 +6,10 @@
 <div class="container mt-5 mb-5 pt-5 pb-5">
     <h1 class="text-center">Книги</h1>
     <div th:each="el : ${books}" class="container-fluid col-12 d-flex justify-content-center align-self-start row">
-        <div class="col-12 col-md-6 row alert alert-info mt-2">
+        <div class="col-12 col-md-6 row alert alert-secondary mt-2">
             <h3 th:text="${el.title}"></h3></br>
-            <p th:text="${el.annotation}"></p></br>
-            <a th:href="'/books/' + ${el.id}" class="btn btn-warning my-1">О книге</a>
+            <p class="m-2"><b>Аннотация: </b><span th:text="${el.annotation}"/></p>
+            <a th:href="'/books/' + ${el.id}" class="btn btn-secondary my-1"><b>О книге</b></a>
         </div>
     </div>
 </div>

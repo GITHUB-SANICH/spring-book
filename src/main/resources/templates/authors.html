@@ -7,9 +7,9 @@
     <h1 class="text-center">Авторы</h1>
     <div th:insert="inputs_form/searches :: authors_search"></div>
     <div th:each="el : ${authors}" class="container-fluid col-12 d-flex justify-content-center align-self-start row">
-        <div class="col-12 col-md-6 row alert alert-info mt-2">
+        <div class="col-12 col-md-6 row alert alert-secondary mt-2">
             <h3 th:text="${el.name}"></h3></br>
-            <a th:href="'/authors/' + ${el.id} + '/books'" class="btn btn-warning my-1">Книги автора</a>
+            <a th:href="'/authors/' + ${el.id} + '/books'" class="btn btn-secondary my-1"><b>Книги автора</b></a>
         </div>
     </div>
 </div>

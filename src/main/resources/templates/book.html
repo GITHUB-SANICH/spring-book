@@ -6,11 +6,11 @@
     <div class="container mt-5 mb-5 pt-5 pb-5">
         <h1 class="text-center">Книга</h1>
         <div th:each="el : ${book}" class="container-fluid col-12 d-flex justify-content-center align-self-start row">
-            <div class="col-12 col-md-6 row alert alert-info mt-2">
+            <div class="col-12 col-md-6 row alert alert-secondary mt-2">
                 <h3 th:text="${el.title}"></h3></br>
-                <p th:text="'Автор: '+${el.author.name}"></p></br>
-                <p th:text="'Описание: '+${el.description}"></p></br>
-                <a th:href="'/authors/' + ${el.author.id}" th:text="${el.author.name}" class="btn btn-warning my-1"></a>
+                <p><b>Автор: </b><span th:text="${el.author.name}"></span></p></br>
+                <p><b>Описание: </b><span th:text="${el.description}"></span></p></br>
+                <a th:href="'/authors/' + ${el.author.id}" class="btn btn-secondary my-1"><b th:text="${el.author.name}"></b></a>
             </div>
         </div>
     </div>

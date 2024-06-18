@@ -8,10 +8,13 @@
     <form action="/books/add" method="post" class="my-5">
         <div th:text="${success_mess}" th:class="${success_class}"></div>
         <div th:text="${error_mess}" th:class="${error_class}"></div>
-        <input type="text" name="title" placeholder="Введите название книги" class="form-control"></br>
-        <textarea name="annotation" placeholder="Введите аннотацию книги" class="form-control"></textarea></br>
-        <textarea name="description" placeholder="Введите описание книги" class="form-control"></textarea></br>
-        <label for="author_book" class="form-label">Автор книги</label>
+        <label for="title" class="form-label"><b>Заголовок</b></label>
+        <input type="text" name="title" id="title" placeholder="Введите название книги" class="form-control"></br>
+        <label for="annotation" class="form-label"><b>Аннотация</b></label>
+        <textarea name="annotation" id="annotation" placeholder="Введите аннотацию книги" class="form-control"></textarea></br>
+        <label for="description" class="form-label"><b>Описание</b></label>
+        <textarea name="description" id="description" placeholder="Введите описание книги" class="form-control"></textarea></br>
+        <label for="author_book" class="form-label"><b>Автор книги</b></label>
         <select name="author_book" id="author_book" class="form-select form-select-sm" aria-label=".form-select-sm">
             <option th:each="el : ${authors}"  th:value="${el.id}" th:text="${el.name}"></option>
         </select></br>

@@ -1,13 +1,14 @@
-<nav th:fragment="header" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav th:fragment="header" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"
+     xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"><ya-tr-span data-index="1-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Carousel" data-translation="Карусель" data-ch="0" data-type="trSpan" data-selected="false">КНИЖНЫЙ</ya-tr-span></a>
+        <a class="navbar-brand" href="#"><ya-tr-span data-index="1-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Carousel" data-translation="Карусель" data-ch="0" data-type="trSpan" data-selected="false">LIBRARY</ya-tr-span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Переключение навигации">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/"><ya-tr-span data-index="2-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="/" data-translation="Главная" data-ch="0" data-type="trSpan">Главная</ya-tr-span></a>
+                    <a class="nav-link" aria-current="page" href="/"><ya-tr-span data-index="2-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="/" data-translation="Главная" data-ch="0" data-type="trSpan">Главная</ya-tr-span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/authors"><ya-tr-span data-index="3-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Link" data-translation="/authors" data-ch="0" data-type="trSpan">Авторы</ya-tr-span></a>
@@ -16,14 +17,9 @@
                     <a class="nav-link" href="/books"><ya-tr-span data-index="3-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Link" data-translation="/books" data-ch="0" data-type="trSpan">Книги</ya-tr-span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/books/add"><ya-tr-span data-index="3-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Link" data-translation="/add_book" data-ch="0" data-type="trSpan">Добавить книгу</ya-tr-span></a>
+                    <a  class="nav-link" href="/books/add"><ya-tr-span data-index="3-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Link" data-translation="/add_book" data-ch="0" data-type="trSpan">Добавить книгу</ya-tr-span></a>
                 </li>
             </ul>
-<!--            <div th:insert="inputs_form/searches :: ${search}"></div>-->
-<!--            <form class="d-flex" role="search" method="post">-->
-<!--                <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">-->
-<!--                <button class="btn btn-outline-success" type="submit">Поиск</button>-->
-<!--            </form>-->
         </div>
     </div>
 </nav>
