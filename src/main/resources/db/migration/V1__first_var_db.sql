@@ -1,16 +1,15 @@
-create table if not exists authors (
-    id bigint not null,
-    name varchar(50), primary key (id)
+CREATE TABLE IF NOT EXISTS authors (
+    id BIGSERIAL,
+    name VARCHAR(255) NOT NULL,
+    constraint authors_pk primary key (id)
 );
 
-create table if not exists books (
-    id bigint not null,
-    annotation varchar(100),
-    description varchar(1024),
-    title varchar(100),
-    author_id bigint, primary key (id)
+CREATE TABLE IF NOT EXISTS books (
+    id BIGSERIAL,
+    title VARCHAR(255) NOT NULL,
+    annotation VARCHAR(255) NOT NULL,
+    description VARCHAR(1024) NOT NULL,
+    author_id BIGINT NOT NULL,
+    constraint books_pk primary key (id),
+    constraint books_authors_fk foreign key (author_id) references authors (id) on update cascade on delete cascade
 );
-
-create sequence authors_seq start with 1 increment by 50;
-create sequence books_seq start with 1 increment by 50;
-alter table if exists books add constraint book_author_fk foreign key (author_id) references authors;

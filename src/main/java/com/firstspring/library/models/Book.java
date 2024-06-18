@@ -7,11 +7,10 @@ import jakarta.persistence.*;
 @NamedQuery(name = "Book.findLastBooks", query = "SELECT b FROM Book b ORDER BY b.id DESC LIMIT :count")
 public class Book {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title, annotation, description;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
 

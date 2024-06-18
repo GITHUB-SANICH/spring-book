@@ -8,13 +8,11 @@ import java.util.List;
 @Table(name = "authors")
 public class Author {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @OneToMany(mappedBy = "author")
     private List<Book> books;
-//    private List<Book> books = new ArrayList<Book>();
 
     public Author() {
     }

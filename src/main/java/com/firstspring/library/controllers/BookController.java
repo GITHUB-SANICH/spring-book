@@ -75,6 +75,7 @@ public class BookController {
             model.addAttribute("error_mess", "Поле описания должно иметь хотя бы 2 символа");
             return "book-add";
         }
+
         bookRepository.save(book);
         model.addAttribute("success_class", "p-3 mb-2 bg-success text-white");
         model.addAttribute("success_mess", "Книга успешно добавлена");
