@@ -5,11 +5,18 @@
 <header th:insert="blocks/header :: header" data-bs-theme="dark"></header>
 <div class="container mt-5 mb-5 pt-5 pb-5">
     <h1 class="text-center">Добавление книги</h1>
-    <form action="/books/add" method="post">
+    <form action="/books/add" method="post" class="my-5">
+        <div th:text="${success_mess}" th:class="${success_class}"></div>
+        <div th:text="${error_mess}" th:class="${error_class}"></div>
         <input type="text" name="title" placeholder="Введите название книги" class="form-control"></br>
         <textarea name="annotation" placeholder="Введите аннотацию книги" class="form-control"></textarea></br>
         <textarea name="description" placeholder="Введите описание книги" class="form-control"></textarea></br>
+        <label for="author_book" class="form-label">Автор книги</label>
+        <select name="author_book" id="author_book" class="form-select form-select-sm" aria-label=".form-select-sm">
+            <option th:each="el : ${authors}"  th:value="${el.id}" th:text="${el.name}"></option>
+        </select></br>
         <button type="submit" class="btn btn-success">Добавить книгу</button>
+
     </form>
 </div>
 <div th:insert="blocks/footer :: footer"></div>

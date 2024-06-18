@@ -4,21 +4,26 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "books")
+@NamedQuery(name = "Book.findLastBooks", query = "SELECT b FROM Book b ORDER BY b.id DESC LIMIT :count")
 public class Book {
     @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title, annotation, description;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
     private Author author;
 
     public Book() {
     }
-//    public Book(String title) {
-//
-//        this.getSearchResult(title);
-//    }
+
+    public Book(String title, String annotation, String description, Author author) {
+        this.title = title;
+        this.annotation = annotation;
+        this.description = description;
+        this.author = author;
+    }
 
     public Long getId() {
         return id;
@@ -59,7 +64,5 @@ public class Book {
     public void setAuthor(Author author) {
         this.author = author;
     }
-//    public List<Book> getSearchResult(String title){
-//        return List<Book>;
-//    }
+
 }

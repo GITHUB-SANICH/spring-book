@@ -9,8 +9,9 @@
     <div th:each="el : ${books}" class="container-fluid col-12 d-flex justify-content-center align-self-start row">
         <div class="col-12 col-md-6 row alert alert-info mt-2">
             <h3 th:text="${el.title}"></h3></br>
-            <p th:text="${el.annotation}"></p></br>
-            <a th:href="'/authors/' + ${el.author}">Автор</a>
+            <p th:text="'Автор: '+${el.author.name}"></p></br>
+            <p th:text="'Аннотация: '+${el.annotation}"></p></br>
+            <a th:href="'/books/' + ${el.id}" class="btn btn-warning my-1">О книге</a>
         </div>
     </div>
 </div>

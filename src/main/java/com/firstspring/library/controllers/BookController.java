@@ -20,41 +20,70 @@ public class BookController {
 
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
     private AuthorRepository authorRepository;
 
     @GetMapping("/books")
-    public String getBooks(Model model){
+    public String getBooks(Model model) {
         model.addAttribute("title", "Книги");
-        Iterable<Book> books = bookRepository.findAll();
+        Iterable<Book> books = bookRepository.findAllByOrderByTitleAsc();
         model.addAttribute("books", books);
         return "books";
     }
 
     @PostMapping("/books")
-    public String getBooks(@RequestParam String title, Model model){
-//        Book book = new Book(title);
-        model.addAttribute("title", "Книги");
-        Iterable<Book> books = bookRepository.findAll();
+    public String getBooks(@RequestParam String book_title, Model model) {
+        Iterable<Book> books;
+        if (book_title == null || book_title.isEmpty()) {
+            books = bookRepository.findAllByOrderByTitleAsc();
+        } else {
+            books = bookRepository.findByTitleContainingIgnoreCase(book_title);
+        }
         model.addAttribute("books", books);
+        model.addAttribute("title", "Книги");
         return "books";
     }
 
-//    @GetMapping("/books/add")
-//    public String addBook(Model model) {
-//        model.addAttribute("title", "Добавление книги");
-//        return "book-add";
-//    }
+    @GetMapping("/books/add")
+    public String addBook(Model model) {
+        Iterable<Author> authors = authorRepository.findAllByOrderByNameAsc();
+        model.addAttribute("authors", authors);
+        model.addAttribute("title", "Добавление книги");
+        return "book-add";
+    }
 
-//    @PostMapping("/books/add")
-//    public String addBookPost(@RequestParam String title, @RequestParam String annotation, RequestParam String description, @RequestParam Author author, Model model) {
-//        Book book = new Book(title, annotation, description, author);
-//        bookRepository.save(book);
-//        return "redirect:/";
-//    }
+    @PostMapping("/books/add")
+    public String addBookPost(@RequestParam String title, @RequestParam String annotation, @RequestParam String description, @RequestParam Long author_book, Model model) {
+        model.addAttribute("title", "Добавление книги");
+        Book book = new Book(title, annotation, description, new Author(author_book));
+        Iterable<Author> authors = authorRepository.findAllByOrderByNameAsc();
+        model.addAttribute("authors", authors);
+        if (author_book == null){
+            model.addAttribute("error_class", "p-3 mb-2 bg-danger text-white");
+            model.addAttribute("error_mess", "Выберите автора");
+            return "book-add";
+        } else if (title.length() < 2) {
+            model.addAttribute("error_class", "p-3 mb-2 bg-danger text-white");
+            model.addAttribute("error_mess", "Поле заголовка должно иметь хотя бы 2 символа");
+            return "book-add";
+        }else if (annotation.length() < 2) {
+            model.addAttribute("error_class", "p-3 mb-2 bg-danger text-white");
+            model.addAttribute("error_mess", "Поле аннотации должно иметь хотя бы 2 символа");
+            return "book-add";
+        }else if (description.length() < 2) {
+            model.addAttribute("error_class", "p-3 mb-2 bg-danger text-white");
+            model.addAttribute("error_mess", "Поле описания должно иметь хотя бы 2 символа");
+            return "book-add";
+        }
+        bookRepository.save(book);
+        model.addAttribute("success_class", "p-3 mb-2 bg-success text-white");
+        model.addAttribute("success_mess", "Книга успешно добавлена");
+        return "book-add";
+    }
 
     @GetMapping("/books/{id}")
     public String bookDetails(@PathVariable(value = "id") long id, Model model) {
-        if(!bookRepository.existsById(id)){
+        if (!bookRepository.existsById(id)) {
             return "redirect:/";
         }
         Optional<Book> book = bookRepository.findById(id);
@@ -62,35 +91,6 @@ public class BookController {
         book.ifPresent(res::add);
         model.addAttribute("title", "Книга");
         model.addAttribute("book", res);
-        return "book-details";
+        return "book";
     }
-
-//    @GetMapping("/books/{id}/edit")
-//    public String bookEdit(@PathVariable(value = "id") long id, Model model) {
-//        if(!bookRepository.existsById(id)){
-//            return "redirect:/";
-//        }
-//        Optional<Book> book = bookRepository.findById(id);
-//        ArrayList<Book> res = new ArrayList<>();
-//        book.ifPresent(res::add);
-//        model.addAttribute("book", res);
-//        return "book-edit";
-//    }
-//
-//    @PostMapping("/books/{id}/edit")
-//    public String bookPostUpdate(@PathVariable(value = "id") long id, @RequestParam String title, @RequestParam String description, @RequestParam Author author, Model model) {
-//        Book book = bookRepository.findById(id).orElseThrow();
-//        book.setTitle(title);
-//        book.setDescription(description);
-//        book.setAuthor(author);
-//        bookRepository.save(book);
-//        return "redirect:/";
-//    }
-
-//    @PostMapping("/books/{id}/remove")
-//    public String bookPostDelete(@PathVariable(value = "id") long id, Model model) {
-//        Book book = bookRepository.findById(id).orElseThrow();
-//        bookRepository.delete(book);
-//        return "redirect:/";
-//    }
 }

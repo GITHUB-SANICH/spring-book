@@ -19,7 +19,7 @@ public class MainController {
 
     @GetMapping("/")
     public String home(Model model) {
-        Iterable<Book> books = bookRepository.findAll();
+        Iterable<Book> books = bookRepository.findLastBooks(10);
         model.addAttribute("books", books);
         model.addAttribute("title", "Главная страница");
         return "home";
