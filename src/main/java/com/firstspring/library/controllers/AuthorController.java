@@ -62,7 +62,7 @@ public class AuthorController {
         if (!bookRepository.existsById(id)) {
             return "redirect:/";
         }
-        List<Book> books = bookRepository.findBooksFromAuthor(id);
+        List<Book> books = bookRepository.findAllByAuthor(new Author(id));
         model.addAttribute("title", "Книги автора");
         model.addAttribute("books", books);
         return "author-books";
