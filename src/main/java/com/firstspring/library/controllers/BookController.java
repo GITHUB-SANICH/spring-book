@@ -55,7 +55,6 @@ public class BookController {
     @PostMapping("/books/add")
     public String addBookPost(@RequestParam String title, @RequestParam String annotation, @RequestParam String description, @RequestParam Long author_book, Model model) {
         model.addAttribute("title", "Добавление книги");
-        Book book = new Book(title, annotation, description, new Author(author_book));
         Iterable<Author> authors = authorRepository.findAllByOrderByNameAsc();
         model.addAttribute("authors", authors);
         if (author_book == null){
@@ -75,7 +74,7 @@ public class BookController {
             model.addAttribute("error_mess", "Поле описания должно иметь хотя бы 2 символа");
             return "book-add";
         }
-
+        Book book = new Book(title, annotation, description, new Author(author_book));
         bookRepository.save(book);
         model.addAttribute("success_class", "p-3 mb-2 bg-success text-white");
         model.addAttribute("success_mess", "Книга успешно добавлена");
