@@ -1,5 +1,6 @@
 package com.firstspring.library.controllers;
 
+
 import com.firstspring.library.models.Author;
 import com.firstspring.library.models.Book;
 import com.firstspring.library.repo.AuthorRepository;
@@ -57,28 +58,23 @@ public class BookController {
         model.addAttribute("title", "Добавление книги");
         Iterable<Author> authors = authorRepository.findAllByOrderByNameAsc();
         model.addAttribute("authors", authors);
-        if (author_book == null){
+
+        try {
+            if (author_book == null) throw new NullPointerException("Выберите автора");
+            if (title.length() < 2) throw new Exception("Поле заголовка должно иметь хотя бы 2 символа");
+            if (annotation.length() < 2) throw new Exception("Поле аннотации должно иметь хотя бы 2 символа");
+            if (description.length() < 2) throw new Exception("Поле описания должно иметь хотя бы 2 символа");
+
+            Book book = new Book(title, annotation, description, new Author(author_book));
+            bookRepository.save(book);
+            model.addAttribute("success_class", "p-3 mb-2 bg-success text-white");
+            model.addAttribute("success_mess", "Книга успешно добавлена");
+        } catch (Exception e) {
             model.addAttribute("error_class", "p-3 mb-2 bg-danger text-white");
-            model.addAttribute("error_mess", "Выберите автора");
-            return "book-add";
-        } else if (title.length() < 2) {
-            model.addAttribute("error_class", "p-3 mb-2 bg-danger text-white");
-            model.addAttribute("error_mess", "Поле заголовка должно иметь хотя бы 2 символа");
-            return "book-add";
-        }else if (annotation.length() < 2) {
-            model.addAttribute("error_class", "p-3 mb-2 bg-danger text-white");
-            model.addAttribute("error_mess", "Поле аннотации должно иметь хотя бы 2 символа");
-            return "book-add";
-        }else if (description.length() < 2) {
-            model.addAttribute("error_class", "p-3 mb-2 bg-danger text-white");
-            model.addAttribute("error_mess", "Поле описания должно иметь хотя бы 2 символа");
+            model.addAttribute("error_mess", e.getMessage());
+        } finally {
             return "book-add";
         }
-        Book book = new Book(title, annotation, description, new Author(author_book));
-        bookRepository.save(book);
-        model.addAttribute("success_class", "p-3 mb-2 bg-success text-white");
-        model.addAttribute("success_mess", "Книга успешно добавлена");
-        return "book-add";
     }
 
     @GetMapping("/books/{id}")
